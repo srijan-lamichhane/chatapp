@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+import generateTokenAndCookie from "../utils/generateToken.js";
 
 export const signup = async (req,res) =>{
     try{
@@ -14,6 +16,8 @@ export const signup = async (req,res) =>{
             return res.status(400).json({message: "user already exists"});
         }
         // to hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         //avatar: avatar-placeholder.iran.liara.run/
         const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
@@ -23,18 +27,28 @@ export const signup = async (req,res) =>{
         const newUser = new User({
             fullName, 
             username,
-            password,
+            password: hashedPassword,
             gender,
             profilePic: gender === "male"? boyProfilePic : girlProfilePic
         });
-        await newUser.save(); // to save the user to the database
+
+        if(newUser){
+            // Generate jwt token here
+            generateTokenAndCookie(newUser._id, res);
+
+            
+            await newUser.save(); // to save the user to the database
         
-        res.status(201).json({
-            _id: newUser._id,
-            fullName: newUser.fullName,
-            username: newUser.username,
-            profilePic: newUser.profilePic,
-        });                 
+            res.status(201).json({
+                _id: newUser._id,
+                fullName: newUser.fullName,
+                username: newUser.username,
+                profilePic: newUser.profilePic,
+            });        
+        }        
+        else{
+            res.status(400).json({message: "Invalid user data"});
+        } 
 
     }
     catch(error){
