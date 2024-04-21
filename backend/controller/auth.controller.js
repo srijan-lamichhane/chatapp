@@ -1,8 +1,11 @@
-export const signup = async(req,res) =>{
+import User from "../models/user.model.js";
+
+export const signup = async (req,res) =>{
     try{
+        console.log("Request Body:", req.body);
         const {fullName, username, password, confirmPassword, gender} = req.body;
         // to check if the password match
-        if(password!==confirmPassword){
+        if(password !== confirmPassword){
             return res.status(400).json({message: "passwords do not match"});
         }
         // to check if user already exists
@@ -25,6 +28,7 @@ export const signup = async(req,res) =>{
             profilePic: gender === "male"? boyProfilePic : girlProfilePic
         });
         await newUser.save(); // to save the user to the database
+        
         res.status(201).json({
             _id: newUser._id,
             fullName: newUser.fullName,
