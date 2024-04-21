@@ -2,18 +2,17 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import generateTokenAndCookie from "../utils/generateToken.js";
 
-export const signup = async (req,res) =>{
-    try{
-        console.log("Request Body:", req.body);
-        const {fullName, username, password, confirmPassword, gender} = req.body;
+export const signup = async (req, res) => {
+    try {
+        const { fullName, username, password, confirmPassword, gender } = req.body;
         // to check if the password match
-        if(password !== confirmPassword){
-            return res.status(400).json({message: "passwords do not match"});
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: "passwords do not match" });
         }
         // to check if user already exists
-        const user = await User.findOne({username})
-        if(user){
-            return res.status(400).json({message: "user already exists"});
+        const user = await User.findOne({ username })
+        if (user) {
+            return res.status(400).json({ message: "user already exists" });
         }
         // to hash the password
         const salt = await bcrypt.genSalt(10);
@@ -25,40 +24,61 @@ export const signup = async (req,res) =>{
 
         // to create a new user
         const newUser = new User({
-            fullName, 
+            fullName,
             username,
             password: hashedPassword,
             gender,
-            profilePic: gender === "male"? boyProfilePic : girlProfilePic
+            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
         });
 
-        if(newUser){
+        if (newUser) {
             // Generate jwt token here
             generateTokenAndCookie(newUser._id, res);
 
-            
+
             await newUser.save(); // to save the user to the database
-        
+
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.username,
                 profilePic: newUser.profilePic,
-            });        
-        }        
-        else{
-            res.status(400).json({message: "Invalid user data"});
-        } 
+            });
+        }
+        else {
+            res.status(400).json({ message: "Invalid user data" });
+        }
 
     }
-    catch(error){
+    catch (error) {
         console.log("Error in signup controller", error.message);
-        res.status(500).json({message: "Internal server error"})
+        res.status(500).json({ message: "Internal server error" })
     }
 };
-export const login = (req,res) =>{
-    res.send("login user");
+export const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+        if(!user || !isPasswordCorrect){
+            return res.status(400).json({message: "Invalid usernname or password"});
+        }
+        else{
+            generateTokenAndCookie(user._id, res);
+            res.status(200).json({
+                _id: user._id,
+                fullName: user.fullName,
+                username: user.username,
+                profilePic: user.profilePic
+            });
+        
+        }
+    }
+    catch (error) {
+        console.log("Error in login controller", error.message);
+        res.status(500).json({ message: "Internal server error" })
+    }
 }
-export const logout = (req,res) =>{
+export const logout = (req, res) => {
     res.send("logout user");
 }
