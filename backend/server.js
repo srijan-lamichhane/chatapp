@@ -22,7 +22,5 @@ app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
 });
 
-// app.get("/",(req, res) => {
-//     res.send("Hello world!!");
-// });
+
 
