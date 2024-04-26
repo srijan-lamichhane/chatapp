@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.routes.js';
 import messageRoutes from './routes/message.routes.js'; 
@@ -14,6 +15,7 @@ dotenv.config();
 const PORT = process.env.PORT || 8000;
 // imp: express json middleware should be used before the routes definition.
 app.use(express.json()); // to parse the incoming request with JSON payloads.
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
