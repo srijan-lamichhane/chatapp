@@ -44,7 +44,10 @@ npm run build
 ### Start the app
 
 ```shell
-npm start
+cd frontend
+```
+```shell
+npm run dev
 ```
 
 ### 🌟star to the repository is appreciated

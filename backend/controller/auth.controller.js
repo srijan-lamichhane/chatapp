@@ -28,13 +28,12 @@ export const signup = async (req, res) => {
             username,
             password: hashedPassword,
             gender,
-            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
+            profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
         });
 
         if (newUser) {
             // Generate jwt token here
             generateTokenAndCookie(newUser._id, res);
-
 
             await newUser.save(); // to save the user to the database
 

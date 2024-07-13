@@ -1,0 +1,30 @@
+====signup functionality====
+
+install react-router-dom.
+main.jsx --> wrap app with BrowserRouter, import ReactDOM.
+app.jsx --> Use Routes inside div, then use Route inside Routes to navigate elements.
+vite.config.js --> change port to 3000 inside server
+
+login.jsx --> Link to signup {if Don't have an ac}
+signup.jsx --> Link to login {if already have an ac},
+                keep track of inputs using useState, 
+                add value and trigger event in each inputs,
+                handleSubmit in form (console log inputs and can see the values in the console),
+                handleCheckboxChange and add call back in genderCheckbox (pass props and field in genderCheckbox.jsx),
+
+===we can add signup functionality in handleSubmit but it will look messy, so we will use hooks.===
+
+src>>hooks??useSignup.js (from here we will return values).
+                useState for loading
+                signup fxn to handle input error for validation --> define the handleInputError fxn below
+                import signup in Signup.jsx 
+                fetch api and extract the data, also use loading state.
+                get loading and signup in useSignup.jsx
+=== TEST == by trying to sign.
+                    run server ==> npm run server
+                    frontend ==> npm run dev
+blocked by cors policy ==> change in develoment vite.config.js ==> proxy: 
+
+
+
+
