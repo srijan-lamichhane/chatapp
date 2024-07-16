@@ -1,0 +1,15 @@
+// after we signin we should move to the homepage.
+
+useSignup.js ==> if error in the data throw data.error.
+frontend>>src>>context>>(AuthContext.jsx) --> export AuthContext and AuthContextProvider -> to locally store data user data.
+                we create AuthContextProvider and pass children as a prop that we can use in our entire application
+                then we return this AuthContextProvider with some value
+                use useState and get the value form local storage | if no value give null
+
+main.js ==> wrap App with AuthContextProvider
+AuthContext.jsx ==> use hook in btn (useAuthContext)
+
+useSignup.jsx --> define local storage and context.
+app.jsx --> {authuser} from useAuthContext() 
+            
+

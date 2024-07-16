@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import { useAuthContext } from '../context/AuthContext';
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false);
+    const {setAuthUser} = useAuthContext();
 
     const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
         // handle input errors for validation
@@ -22,7 +24,15 @@ const useSignup = () => {
 
             // extract the data from the response
             const data = await res.json();
-            console.log(data);
+            if(data.error){
+                throw new Error(data.error)
+            }
+
+            //local storage (when we refresh the page we can get that value from local storage if we are logged in or not)
+                localStorage.setItem("chat-user",JSON.stringify(data));
+
+            //context
+            setAuthUser(data);
 
         }
 
