@@ -1,0 +1,1 @@
+make (useLogout.js) hook to removeItem from local storage and set authUser to null.

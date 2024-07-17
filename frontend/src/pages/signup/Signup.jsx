@@ -14,15 +14,15 @@ const SignUp = () => {
     gender: '',
   });
 
-  const {loading , signup} = useSignup();
+  const { loading, signup } = useSignup();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // prevent the reload of page and helps to submit data
     await signup(inputs);
   }
 
   const handleCheckboxChange = (gender) => {
-    setInputs({...inputs, gender})
+    setInputs({ ...inputs, gender })
   };
 
   return (
@@ -37,14 +37,14 @@ const SignUp = () => {
             <label className='label p-2'>
               <span className='text-base label-text'>Full Name</span>
             </label>
-            <input type='text' placeholder='fullname' className='w-full input input-bordered  h-10' value={inputs.fullName} onChange={(e) => setInputs({...inputs, fullName:e.target.value})} /> {/* spread the inputs and change fullName only */}
+            <input type='text' placeholder='fullname' className='w-full input input-bordered  h-10' value={inputs.fullName} onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })} /> {/* spread the inputs and change fullName only */}
           </div>
 
           <div>
             <label className='label p-2 '>
               <span className='text-base label-text'>Username</span>
             </label>
-            <input type='text' placeholder='username' className='w-full input input-bordered h-10' value = {inputs.username} onChange={(e) => setInputs({...inputs, username:e.target.value})} />
+            <input type='text' placeholder='username' className='w-full input input-bordered h-10' value={inputs.username} onChange={(e) => setInputs({ ...inputs, username: e.target.value })} />
           </div>
 
           <div>
@@ -55,7 +55,7 @@ const SignUp = () => {
               type='password'
               placeholder='Enter Password'
               className='w-full input input-bordered h-10'
-              value = {inputs.password} onChange={(e) => setInputs({...inputs, password: e.target.value })}
+              value={inputs.password} onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
             />
           </div>
 
@@ -67,22 +67,24 @@ const SignUp = () => {
               type='password'
               placeholder='Confirm Password'
               className='w-full input input-bordered h-10'
-              value = {inputs.confirmPassword}
-              onChange={(e) => setInputs({...inputs, confirmPassword: e.target.value })}
+              value={inputs.confirmPassword}
+              onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
             />
           </div>
 
-          <GenderCheckbox onCheckboxChange = {handleCheckboxChange} selectedGender = {inputs.gender} />
+          <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-          <Link 
-          to='/login' 
-          className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block' 
-          href='#'>
+          <Link
+            to='/login'
+            className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'
+            href='#'>
             Already have an account?
           </Link>
 
           <div>
-            <button className='btn btn-block btn-sm mt-2 border border-slate-700'>Sign Up</button>
+            <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading}>
+              { loading ? <span className='loading loading-spinner'></span> : "Sign Up" }
+            </button>
           </div>
         </form>
       </div>

@@ -13,7 +13,7 @@ This is a real-time chat application developed using the MERN (MongoDB, Express.
 
 ## Technologies Used
 
-- **Frontend:** React.js, HTML/CSS, Bootstrap (or any other UI library)
+- **Frontend:** React.js, HTML/CSS, Tailwind, daisyUI
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB (using Mongoose for ODM)
 - **Real-time Communication:** socket.io
