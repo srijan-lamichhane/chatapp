@@ -7,21 +7,21 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false)
     const {setAuthUser} = useAuthContext()
 
-    const login = async () => {
+    const login = async (username, password) => {
         setLoading(true)
         try{
-            const res = await fetch("/api/auth/logout",{
+            const res = await fetch("/api/auth/login",{
                 method: "POST",
-                header: {
+                headers: {
                     "Content-Type": "application/json"
                 },
             });
 
             const data = await res.json()
             if(data.error){
-                throw new error(data.error)
+                throw new Error(data.error)
             }
-            localStorage.setItem("chat-user", json.stringify(data))
+            localStorage.setItem("chat-user", JSON.stringify({username, password}))
             setAuthUser(data)
 
         }catch(error){
