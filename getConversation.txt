@@ -1,0 +1,4 @@
+src>> zustand folder and useConversation.js file (zustand provides global state that w3e could use in our entire application) -> like we did using context
+        useConversation.js -->  import create
+        selectedConversation and messages to useConversation
+// now we need to create hook to fetch conversation from our database.

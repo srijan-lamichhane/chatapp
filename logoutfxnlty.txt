@@ -1,6 +1,0 @@
-make (useLogout.js) hook to removeItem from local storage and set authUser to null.
-
-logoutButtom.jsx --> use logout and loading from uselogout hook. 
-                    onClick to logoutButtom, logout. use loading in the logoutButtom
-use loading in signup.jsx signup buttom. should be disabled initially.
-=========== TEST =================

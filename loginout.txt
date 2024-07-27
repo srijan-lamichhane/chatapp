@@ -1,0 +1,18 @@
+============== Logout Functionality ==============================
+make (useLogout.js) hook to removeItem from local storage and set authUser to null.
+
+logoutButtom.jsx --> use logout and loading from uselogout hook. 
+                    onClick to logoutButtom, logout. use loading in the logoutButtom
+use loading in signup.jsx signup buttom. should be disabled initially.
+=========== TEST =================
+
+
+================== Login Functionality ============================
+
+login.jsx --> useState for username and password.
+              handleSubmit -> prevent default and login(username, password) fxn.
+              set "value" and onChange it trigger setter fxn (setusername) -> to update state
+              onSubmit of form handleSubmit
+// create hook to login user.
+useLogin.js --> same as logout and signup hooks. --> localStorage ma setItem, setAuthuser(data)
+login.jsx --> get loading, login from above hook. 
