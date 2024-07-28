@@ -60,19 +60,20 @@ export const login = async (req, res) => {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
-        if(!user || !isPasswordCorrect){
-            return res.status(400).json({message: "Invalid usernname or password"});
+        if (!user || !isPasswordCorrect) {
+            return res.status(400).json({ message: "Invalid usernname or password" });
         }
-        else{
-            generateTokenAndCookie(user._id, res);
-            res.status(200).json({
-                _id: user._id,
-                fullName: user.fullName,
-                username: user.username,
-                profilePic: user.profilePic
-            });
-        
-        }
+        // I was getting error of unauthorized token since this below section was under else and the token is not generated while logging in.
+        console.log("User authenticated, generating token");
+        generateTokenAndCookie(user._id, res);
+        res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            username: user.username,
+            profilePic: user.profilePic
+        });
+
+
     }
     catch (error) {
         console.log("Error in login controller", error.message);
@@ -81,11 +82,11 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) => {
-    try{
-        res.cookie("jwt", "", {maxAge: 0});
-        res.status(200).json({message: "Logged out successfully"});
+    try {
+        res.cookie("jwt", "", { maxAge: 0 });
+        res.status(200).json({ message: "Logged out successfully" });
     }
-    catch(error){
+    catch (error) {
         console.log("Error in logout controller", error.message);
         res.status(500).json({ message: "Internal server error" });
     }

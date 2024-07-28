@@ -1,7 +1,8 @@
 src>> zustand folder and useConversation.js file (zustand provides global state that w3e could use in our entire application) -> like we did using context
         useConversation.js -->  import create
         selectedConversation and messages to useConversation
-// now we need to create hook to fetch conversation from our database.
+
+// now we need to create hook to fetch conversation from our database.(user.controller.js)
 hooks>> useGetConversations.js -->   loading 
         useState with empty array for conversation and setConversation 
         useEffect(to instantly return ) -- getConversations as async fxn -- try block -- setLoading(true) -- get res from /api/users -- put it in the data var
@@ -15,4 +16,7 @@ hooks>> useGetConversations.js -->   loading
 conversation.js --> loading and conversations from the above hook.
                     console.log("conversations:", conversations) ==> to see the result --> then we can remove after testing
                     
-                    
+                    inside div -> map the conversation with conversations -> get key conversation,emoji, lastIDX
+src>> utils >> emojis.js -> (paste)
+                
+                     
