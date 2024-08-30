@@ -13,7 +13,7 @@ hooks>> useGetConversations.js -->   loading
       return loading and conversations
 
 
-conversation.js --> loading and conversations from the above hook.
+conversations.jsx --> loading and conversations from the above hook.
                     console.log("conversations:", conversations) ==> to see the result --> then we can remove after testing
                     
                     inside div -> map the conversation with conversations -> get key conversation,emoji, lastIDX
