@@ -8,7 +8,7 @@ const useSendMessage = () => {
 
     const sendMessage = async (message) => {
         setLoading(true)
-        console.log(selectedConversation); // Check if the selected conversation exists
+ 
         try{
             const res = await fetch(`api/messages/send/${selectedConversation._id}`,{
                 method: "POST",
@@ -17,6 +17,7 @@ const useSendMessage = () => {
                 },
                 body: JSON.stringify({message}),
             });
+
             const data = await res.json();
             if(data.error) throw new Error (data.error);
             setMessages([...messages, data])
