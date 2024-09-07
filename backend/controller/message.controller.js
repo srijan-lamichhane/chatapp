@@ -24,18 +24,18 @@ export const sendMessage = async (req, res) => {
         });
         //4. push the new message to the conversation
         if (newMessage) {
-            conversation.messages.push(newMessage);
+            conversation.messages.push(newMessage._id);
         }
 
-        res.status(201).json({ newMessage });
-
+        
         //socket I/O function will go here
-
+        
         //5. save the conversation to db
         // await conversation.save();
         // await newMessage.save();
-
+        
         await Promise.all([conversation.save(), newMessage.save()]);
+        res.status(201).json({ newMessage });
     }
     catch (error) {
         console.log("Error in sendMessage controller: ", error.message);
