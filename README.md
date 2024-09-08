@@ -20,9 +20,10 @@ This is a real-time chat application developed using the MERN (MongoDB, Express.
 
 ## Project Screen Shot(s)
 
-[ COMMING SOON ]
-
-[ COMMING SOON ]
+![Login Image](https://raw.githubusercontent.com/srijan-lamichhane/chatapp/main/images/login.png)
+![Login Image](https://raw.githubusercontent.com/srijan-lamichhane/chatapp/main/images/signup.png)
+![Login Image](https://raw.githubusercontent.com/srijan-lamichhane/chatapp/main/images/messages.png)
+![Login Image](https://raw.githubusercontent.com/srijan-lamichhane/chatapp/main/images/active_status.png)
 
 ## Contributing
 Contributions are welcome! Feel free to fork the repository and submit pull requests.
