@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
     try {
@@ -27,14 +28,18 @@ export const sendMessage = async (req, res) => {
             conversation.messages.push(newMessage._id);
         }
 
-        
-        //socket I/O function will go here
-        
         //5. save the conversation to db
         // await conversation.save();
         // await newMessage.save();
-        
+
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        //socket I/O function will go here
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage); // sending the new message to the specific receiver
+        }
+
         res.status(201).json({ newMessage });
     }
     catch (error) {
@@ -43,17 +48,17 @@ export const sendMessage = async (req, res) => {
     }
 };
 
-export const getMessage = async (req, res) => {
+export const getMessages = async (req, res) => {
     try {
-        const { id: receiverId } = req.params;
+        const { id: userToChatId } = req.params;
         const senderId = req.user._id;
 
         const conversation = await Conversation.findOne({
-            participants: { $all: [senderId, receiverId] },
+            participants: { $all: [senderId, userToChatId] },
         }).populate("messages");  // Not Reference but acutal messages
 
         // if conversation doesn't exist, return empty array
-        if(!conversation){
+        if (!conversation) {
             return res.status(200).json([]);
         }
         // if conversation exists, return the messages
@@ -63,6 +68,6 @@ export const getMessage = async (req, res) => {
     }
     catch (error) {
         console.log("Error in getMessage controller: ", error.message);
-        res.status(500).json({error: "Internal Server Error"})
+        res.status(500).json({ error: "Internal Server Error" })
     }
 }
