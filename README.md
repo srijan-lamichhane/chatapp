@@ -18,6 +18,12 @@ This is a real-time chat application developed using the MERN (MongoDB, Express.
 - **Database:** MongoDB (using Mongoose for ODM)
 - **Real-time Communication:** socket.io
 
+## Project Screen Shot(s)
+
+[ COMMING SOON ]
+
+[ COMMING SOON ]
+
 ## Contributing
 Contributions are welcome! Feel free to fork the repository and submit pull requests.
 
@@ -48,6 +54,11 @@ cd frontend
 ```
 ```shell
 npm run dev
+```
+### Start the server
+
+```shell
+npm run server
 ```
 
 ### 🌟star to the repository is appreciated
