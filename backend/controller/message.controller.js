@@ -34,7 +34,7 @@ export const sendMessage = async (req, res) => {
 
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        //socket I/O function will go here
+        //6. socket I/O function will go here
         const receiverSocketId = getReceiverSocketId(receiverId);
         if(receiverSocketId){
             io.to(receiverSocketId).emit("newMessage", newMessage); // sending the new message to the specific receiver

@@ -2,7 +2,7 @@ import {createContext, useState, useEffect , useContext} from 'react'
 import { useAuthContext } from './AuthContext';
 import io from 'socket.io-client';
 
-export const SocketContext = createContext();
+export const SocketContext = createContext(); // socketContext will act as a container for the shared state
 
 //hook
 export const useSocketContext = () => {
@@ -37,7 +37,7 @@ export const SocketContextProvider = ({ children }) => {
         }
     }, [authUser]);
 
-    return <SocketContext.Provider value={{socket, onlineUsers}}>
+    return <SocketContext.Provider value={{socket, onlineUsers }}>
         {children}
     </SocketContext.Provider>;
 };
