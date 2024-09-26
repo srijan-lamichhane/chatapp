@@ -21,15 +21,17 @@ const PORT = process.env.PORT || 5000;
 // imp: express json middleware should be used before the routes definition.
 app.use(express.json()); // to parse the incoming request with JSON payloads.
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'frontend/dist'))); // serve the static files from the React app
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-});
 
 app.use("/api/auth", authRoutes); // for signin, login, logout
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes); // for conversations
+
+app.use(express.static(path.join(__dirname, 'frontend/dist'))); // serve the static files from the React app
+
+// Catch-all route handler for frontend && Ensure that this catch-all route for the frontend is placed after your API routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
 
 
 server.listen(PORT, () => {
