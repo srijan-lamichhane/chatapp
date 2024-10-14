@@ -1,0 +1,1 @@
+components of shadcn used: avatar dialog popover resizable scroll-area skeleton textarea tooltip bottom
