@@ -1,1 +1,3 @@
 components of shadcn used: avatar dialog popover resizable scroll-area skeleton textarea tooltip bottom
+
+installed "zustand" for global access of preference tab components . "use-sound" for sound 
