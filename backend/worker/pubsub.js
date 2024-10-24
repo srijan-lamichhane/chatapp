@@ -1,3 +1,5 @@
+import subscriber from "../db/connectToMongoDB";
+
 subscriber.subscribe("new_message", (err) => {
   if (err) {
     console.error("Failed to subscribe to new_message channel:", err);
