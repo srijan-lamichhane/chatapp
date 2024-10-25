@@ -1,6 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
-import publisher from "../db/connectDB.js";
+import { redis } from "../db/connectDB.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -43,7 +43,7 @@ export const sendMessage = async (req, res) => {
       createdAt: newMessage.createdAt,
     };
 
-    await publisher.publish("new_message", JSON.stringify(messageData));
+    await redis.publish("new_message", JSON.stringify(messageData));
 
     res.status(201).json(newMessage);
   } catch (error) {

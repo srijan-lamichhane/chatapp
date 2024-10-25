@@ -13,12 +13,7 @@ const connectToMongoDB = async () => {
 export default connectToMongoDB;
 
 // Initialize Redis client
-export const publisher = new Redis({
-  host: process.env.REDIS_HOST || "localhost",
-  port: process.env.REDIS_PORT || 6379,
-});
-
-export const subscriber = new Redis({
+export const redis = new Redis({
   host: process.env.REDIS_HOST || "localhost",
   port: process.env.REDIS_PORT || 6379,
 });
