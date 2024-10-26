@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import publisher from "../db/connectToMongoDB.js";
 
 export const sendMessage = async (req, res) => {
   try {
