@@ -1,4 +1,4 @@
-import subscriber from "../db/connectToMongoDB";
+import subscriber from "../db/connectDB";
 
 subscriber.subscribe("new_message", (err) => {
   if (err) {
